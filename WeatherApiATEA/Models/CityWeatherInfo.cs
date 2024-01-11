@@ -15,6 +15,7 @@ namespace WeatherApiATEA.Models
         public double Temperature { get; set; }
         public double Clouds { get; set; }
         public double WindSpeed { get; set; }
+        public DateTime SavedAt { get; set; }
 
         public CityWeatherInfo(string country, string city, double temperature, double clouds, double windSpeed)
         {
@@ -23,6 +24,7 @@ namespace WeatherApiATEA.Models
             Temperature = temperature;
             Clouds = clouds;
             WindSpeed = windSpeed;
+            SavedAt = DateTime.UtcNow;
         }
 
         private CityWeatherInfo() { }
