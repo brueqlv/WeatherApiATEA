@@ -15,17 +15,14 @@ builder.Services.AddHttpClient();
 builder.Services.AddTransient<WeatherRepository>();
 builder.Services.AddTransient<WeatherService>();
 
-builder.Services.AddScoped<WeatherUpdateService>();
-
 builder.Services.AddHostedService<DataInitializationService>();
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
-{ 
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
+
+app.UseExceptionHandler("/Weather/Error");
+app.UseHsts();
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

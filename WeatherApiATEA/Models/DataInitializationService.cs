@@ -11,7 +11,7 @@
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-             await InitializeDataAsync();
+             Task.Run(() => InitializeDataAsync());
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -21,15 +21,20 @@
 
         private async Task InitializeDataAsync()
         {
-            using (var scope = _serviceProvider.CreateScope())
+            while (true)
             {
-                var dbContext = scope.ServiceProvider.GetRequiredService<WeatherDBContext>();
+                using (var scope = _serviceProvider.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<WeatherDBContext>();
+                    var weatherRepository = scope.ServiceProvider.GetRequiredService<WeatherRepository>();
 
-                var weatherRepository = scope.ServiceProvider.GetRequiredService<WeatherRepository>();
-                var data = await weatherRepository.GetCitiesWeatherInformation();
+                    var data = await weatherRepository.GetCitiesWeatherInformation();
 
-                dbContext.CityWeatherInfos.AddRange(data);
-                await dbContext.SaveChangesAsync();
+                    dbContext.CityWeatherInfos.AddRange(data);
+                    await dbContext.SaveChangesAsync();
+                }
+
+                await Task.Delay(TimeSpan.FromMinutes(15));
             }
         }
     }
