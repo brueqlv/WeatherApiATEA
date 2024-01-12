@@ -34,7 +34,7 @@
                     await dbContext.SaveChangesAsync();
                 }
 
-                await Task.Delay(TimeSpan.FromMinutes(15));
+                await Task.Delay(TimeSpan.FromMinutes(1));
             }
         }
     }

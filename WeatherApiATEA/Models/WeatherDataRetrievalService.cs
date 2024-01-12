@@ -17,11 +17,10 @@
         public List<CityWeatherInfo> GetMinTemperatureByCountry()
         {
             var minTemp = _dbContext.CityWeatherInfos
-                .Where(c => c.Temperature == _dbContext.CityWeatherInfos
-                    .Where(inner => inner.Country == c.Country)
-                    .Min(inner => inner.Temperature))
-                .GroupBy(c => c.Country)
-                .Select(group => group.OrderByDescending(c => c.SavedAt).First())
+                .GroupBy(c => c.City)
+                .Select(group => group
+                    .OrderBy(c => c.Temperature)
+                    .FirstOrDefault())
                 .ToList();
 
             return minTemp;
@@ -29,15 +28,14 @@
 
         public List<CityWeatherInfo> GetHighestWindSpeedByCountry()
         {
-            var highestWindSpeed = _dbContext.CityWeatherInfos
-                .Where(c => c.WindSpeed == _dbContext.CityWeatherInfos
-                    .Where(inner => inner.Country == c.Country)
-                    .Max(inner => inner.WindSpeed))
-                .GroupBy(c => c.Country)
-                .Select(group => group.OrderByDescending(c => c.SavedAt).First())
+            var minTemp = _dbContext.CityWeatherInfos
+                .GroupBy(c => c.City)
+                .Select(group => group
+                    .OrderByDescending(c => c.WindSpeed)
+                    .FirstOrDefault())
                 .ToList();
 
-            return highestWindSpeed;
+            return minTemp;
         }
 
         public List<CityWeatherInfo> GetTwoHourTrendData(string cityName)
