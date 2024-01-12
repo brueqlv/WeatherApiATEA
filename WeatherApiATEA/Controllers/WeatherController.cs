@@ -4,90 +4,38 @@ using WeatherApiATEA.Models;
 
 namespace WeatherAPI.Controllers
 {
+    [Route("weather")]
     public class WeatherController : Controller
     {
-        private readonly WeatherRepository _weatherRepository;
+        private readonly WeatherDataRetrievalService _weatherDataRetrievalService;
 
-        public WeatherController(WeatherRepository weatherRepository)
+        public WeatherController(WeatherDataRetrievalService weatherDataRetrievalService)
         {
-            _weatherRepository = weatherRepository;
+            _weatherDataRetrievalService = weatherDataRetrievalService;
         }
 
-        // GET: WeatherController
-        public async Task<ActionResult> Index()
+        [HttpGet("GetMinTemperatures")]
+        public ActionResult GetMinTemperatures()
         {
-            List<CityWeatherInfo> citiesWeather = await _weatherRepository.GetCitiesWeatherInformation();
+            List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetMinTemperatureByCountry();
 
             return View(citiesWeather);
         }
 
-        // GET: WeatherController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("GetHighestWindSpeed")]
+        public ActionResult GetHighestWindSpeed()
         {
-            return View();
+            List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetHighestWindSpeedByCountry();
+
+            return View(citiesWeather);
         }
 
-        // GET: WeatherController/Create
-        public ActionResult Create()
+        [HttpGet("GetTwoHourTrend/{cityName}")]
+        public ActionResult GetTwoHourTrend(string cityName)
         {
-            return View();
-        }
+            List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetTwoHourTrendData(cityName);
 
-        // POST: WeatherController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: WeatherController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: WeatherController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: WeatherController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: WeatherController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(citiesWeather);
         }
     }
 }

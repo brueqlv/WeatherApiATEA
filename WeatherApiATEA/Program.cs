@@ -14,6 +14,7 @@ builder.Services.AddDbContext<WeatherDBContext>(options =>
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<WeatherRepository>();
 builder.Services.AddTransient<WeatherService>();
+builder.Services.AddTransient<WeatherDataRetrievalService>();
 
 builder.Services.AddHostedService<DataInitializationService>();
 
