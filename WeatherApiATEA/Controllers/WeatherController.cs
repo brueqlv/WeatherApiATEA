@@ -14,7 +14,6 @@ namespace WeatherAPI.Controllers
 
         public IActionResult Index()
         {
-            Console.WriteLine("Index action is being accessed.");
             return View();
         }
 
