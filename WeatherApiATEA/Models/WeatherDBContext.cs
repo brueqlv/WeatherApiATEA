@@ -10,10 +10,5 @@ namespace WeatherApiATEA.Models
         {
             Database.Migrate();
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<CityWeatherInfo>().Property<int>("Id");
-        }
     }
 }

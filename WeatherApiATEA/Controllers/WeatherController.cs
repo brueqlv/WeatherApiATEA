@@ -13,8 +13,14 @@ namespace WeatherAPI.Controllers
             _weatherDataRetrievalService = weatherDataRetrievalService;
         }
 
+        public IActionResult Index()
+        {
+            Console.WriteLine("Index action is being accessed.");
+            return View();
+        }
+
         [HttpGet("GetMinTemperatures")]
-        public ActionResult GetMinTemperatures()
+        public IActionResult GetMinTemperatures()
         {
             List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetMinTemperatureByCountry();
 
@@ -22,7 +28,7 @@ namespace WeatherAPI.Controllers
         }
 
         [HttpGet("GetHighestWindSpeed")]
-        public ActionResult GetHighestWindSpeed()
+        public IActionResult GetHighestWindSpeed()
         {
             List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetHighestWindSpeedByCountry();
 
@@ -30,7 +36,7 @@ namespace WeatherAPI.Controllers
         }
 
         [HttpGet("GetTwoHourTrend/{cityName}")]
-        public ActionResult GetTwoHourTrend(string cityName)
+        public IActionResult GetTwoHourTrend(string cityName)
         {
             List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetTwoHourTrendData(cityName);
 

@@ -40,7 +40,7 @@
 
         public List<CityWeatherInfo> GetTwoHourTrendData(string cityName)
         {
-            var twoHoursAgo = DateTime.UtcNow.AddHours(-2);
+            var twoHoursAgo = DateTime.Now.AddHours(-2);
 
             var trendData = _dbContext.CityWeatherInfos
                 .Where(c => c.City == cityName && c.SavedAt >= twoHoursAgo)

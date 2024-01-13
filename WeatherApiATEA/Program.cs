@@ -1,10 +1,9 @@
-
 using Microsoft.EntityFrameworkCore;
 using WeatherApiATEA.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<WeatherDBContext>(options =>
 {
@@ -17,6 +16,7 @@ builder.Services.AddTransient<WeatherService>();
 builder.Services.AddTransient<WeatherDataRetrievalService>();
 
 builder.Services.AddHostedService<DataInitializationService>();
+
 
 var app = builder.Build();
 
@@ -34,6 +34,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Weather}/{action=Index}/{id?}");
 
 app.Run();

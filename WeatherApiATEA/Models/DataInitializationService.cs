@@ -11,7 +11,7 @@
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-             Task.Run(() => InitializeDataAsync());
+            Task.Run(() => InitializeDataAsync());
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -34,7 +34,7 @@
                     await dbContext.SaveChangesAsync();
                 }
 
-                await Task.Delay(TimeSpan.FromMinutes(1));
+                await Task.Delay(TimeSpan.FromMinutes(15));
             }
         }
     }
