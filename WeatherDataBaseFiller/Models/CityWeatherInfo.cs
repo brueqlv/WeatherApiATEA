@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WeatherApiATEA.Models
+namespace WeatherDataBaseFiller
 {
     public class CityWeatherInfo
     {
@@ -25,7 +25,5 @@ namespace WeatherApiATEA.Models
             WindSpeed = windSpeed;
             SavedAt = DateTime.Now;
         }
-
-        private CityWeatherInfo() { }
     }
 }

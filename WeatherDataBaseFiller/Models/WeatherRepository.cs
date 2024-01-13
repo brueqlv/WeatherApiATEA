@@ -1,4 +1,4 @@
-﻿namespace WeatherApiATEA.Models
+﻿namespace WeatherDataBaseFiller
 {
     public class WeatherRepository
     {
@@ -32,7 +32,7 @@
                 var cityWeatherInfo = await _weatherService.GetWeatherData(city);
 
                 string countryName = cityWeatherInfo.Sys.Country;
-                string cityName = cityWeatherInfo.Name;
+                string cityName = city.Name;
                 double temp = GetCelciusFromKelvin(cityWeatherInfo.Main.Temp);
                 double clouds = cityWeatherInfo.Clouds.All;
                 double windSpeed = cityWeatherInfo.Wind.Speed;
