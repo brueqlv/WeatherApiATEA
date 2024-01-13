@@ -3,7 +3,6 @@ using WeatherApiATEA.Models;
 
 namespace WeatherAPI.Controllers
 {
-    [Route("weather")]
     public class WeatherController : Controller
     {
         private readonly WeatherDataRetrievalService _weatherDataRetrievalService;
@@ -16,6 +15,11 @@ namespace WeatherAPI.Controllers
         public IActionResult Index()
         {
             Console.WriteLine("Index action is being accessed.");
+            return View();
+        }
+        [HttpGet("Privacy")]
+        public IActionResult Privacy()
+        {
             return View();
         }
 

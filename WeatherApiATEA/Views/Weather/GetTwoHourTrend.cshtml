@@ -9,7 +9,12 @@
 
 </head>
 <body>
-    <h1>Temperature and Wind Speed Trend for Valmiera</h1>
+    @{
+        var cityName = Model.Select(c => c.City).First().ToString();
+        var decodedCityName = System.Web.HttpUtility.HtmlDecode(cityName);
+    }
+
+    <h1>Temperature and Wind Speed Trend @decodedCityName</h1>
 
     @if (Model != null && Model.Count > 0)
     {
