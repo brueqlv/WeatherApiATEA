@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
-
+    <script type="module" src="~/js/GetTwoHourTrend.js" asp-append-version="true"></script>
 </head>
 <body>
     @{
@@ -19,112 +19,20 @@
     @if (Model != null && Model.Count > 0)
     {
         <canvas id="myChart" width="800" height="400"></canvas>
-
-        <script type="module">
-            document.addEventListener('DOMContentLoaded', function () {
-                var ctx = document.getElementById('myChart').getContext('2d');
-
-                var timestamps = @Html.Raw(Json.Serialize(Model.Select(c => c.SavedAt.ToString("yyyy-MM-ddTHH:mm:ss")))); 
-                timestamps = timestamps.map(function (timestamp) {
-                    return new Date(timestamp);
-                });
-                var temperatures = @Html.Raw(Json.Serialize(Model.Select(c => c.Temperature)));
-                var windSpeeds = @Html.Raw(Json.Serialize(Model.Select(c => c.WindSpeed)));
-                var countries = @Html.Raw(Json.Serialize(Model.Select(c => c.Country)));
-                var cities = @Html.Raw(Json.Serialize(Model.Select(c => c.City)));
-
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: timestamps,
-                        datasets: [{
-                            label: 'Temperature (°C)',
-                            yAxisID: 'temperature',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            data: temperatures
-                        }, {
-                            label: 'Wind Speed (m/s)',
-                            yAxisID: 'windSpeed',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            data: windSpeeds
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            x: {
-                                type: 'time',
-                                time: {
-                                    unit: 'minute',
-                                    parser: 'moment',
-                                    tooltipFormat: 'YYYY-MM-DD HH:mm:ss',
-                                    displayFormats: {
-                                        hour: 'YYYY-MM-DD HH:mm:ss'
-                                    }
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Time'
-                                }
-                            },
-                            y: {
-                                temperature: {
-                                    type: 'linear',
-                                    position: 'left',
-                                    title: {
-                                        display: true,
-                                        text: 'Temperature (°C)'
-                                    }
-                                },
-                                windSpeed: {
-                                    type: 'linear',
-                                    position: 'right',
-                                    title: {
-                                        display: true,
-                                        text: 'Wind Speed (m/s)'
-                                    }
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        var label = context.dataset.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        label += context.parsed.y + ' ';
-
-                                        // Adding additional information to the tooltip
-                                        if (context.dataset.label === 'Temperature (°C)') {
-                                            label += '°C';
-                                        } else {
-                                            label += 'm/s';
-                                        }
-
-                                        var timeAdded = new Date(context.parsed.x);
-                                        var country = countries[context.dataIndex];
-                                        var city = cities[context.dataIndex];
-
-                                        label += '\nCountry: ' + country;
-                                        label += '\nCity: ' + city;
-                                        label += '\nTime Added: ' + timeAdded.toLocaleString();
-
-                                        return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            });
-        </script>
     }
     else
     {
         <p>No weather data available.</p>
     }
+
+    <script>
+        var chartData = {
+            timeStamps: @Html.Raw(Json.Serialize(Model.Select(c => c.SavedAt.ToString("yyyy-MM-ddTHH:mm:ss")))),
+            temperatures: @Html.Raw(Json.Serialize(Model.Select(c => c.Temperature))),
+            windSpeeds: @Html.Raw(Json.Serialize(Model.Select(c => c.WindSpeed))),
+            countries: @Html.Raw(Json.Serialize(Model.Select(c => c.Country))),
+            cities: @Html.Raw(Json.Serialize(Model.Select(c => c.City)))
+            };
+    </script>
 </body>
 </html>

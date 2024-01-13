@@ -2,11 +2,11 @@
     var ctx = document.getElementById('myChart').getContext('2d');
 
     var cityLabels = chartData.cityLabels;
-    var windSpeed = chartData.windSpeed;
+    var windSpeeds = chartData.windSpeeds;
     var countries = chartData.countries;
 
-    var timeAdded = chartData.timeAdded.map(function (timeAdded) {
-        return new Date(timeAdded);
+    var timesAdded = chartData.timesAdded.map(function (timesAdded) {
+        return new Date(timesAdded);
     });
 
     var myChart = new Chart(ctx, {
@@ -15,7 +15,7 @@
             labels: cityLabels,
             datasets: [{
                 label: 'WindSpeed',
-                data: windSpeed,
+                data: windSpeeds,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1

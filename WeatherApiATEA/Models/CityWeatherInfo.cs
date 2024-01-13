@@ -6,9 +6,7 @@ namespace WeatherApiATEA.Models
     public class CityWeatherInfo
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         public string Country { get; set; }
         public string City { get; set; }
         public double Temperature { get; set; }
@@ -25,7 +23,5 @@ namespace WeatherApiATEA.Models
             WindSpeed = windSpeed;
             SavedAt = DateTime.Now;
         }
-
-        private CityWeatherInfo() { }
     }
 }

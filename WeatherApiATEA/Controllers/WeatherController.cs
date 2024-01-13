@@ -17,6 +17,7 @@ namespace WeatherAPI.Controllers
             Console.WriteLine("Index action is being accessed.");
             return View();
         }
+
         [HttpGet("Privacy")]
         public IActionResult Privacy()
         {

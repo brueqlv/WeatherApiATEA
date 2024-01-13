@@ -23,9 +23,9 @@
     <script>
         var chartData = {
             cityLabels: @Html.Raw(Json.Serialize(Model.Select(c => c.City))),
-            windSpeed: @Html.Raw(Json.Serialize(Model.Select(c => c.WindSpeed))),
+            windSpeeds: @Html.Raw(Json.Serialize(Model.Select(c => c.WindSpeed))),
             countries: @Html.Raw(Json.Serialize(Model.Select(c => c.Country))),
-            timeAdded: @Html.Raw(Json.Serialize(Model.Select(c => c.SavedAt)))
+            timesAdded: @Html.Raw(Json.Serialize(Model.Select(c => c.SavedAt)))
             };
     </script>
 </body>
