@@ -37,7 +37,7 @@ namespace WeatherDataBaseFiller
                     await dbContext.SaveChangesAsync();
                 }
 
-                await Task.Delay(TimeSpan.FromMinutes(1));
+                await Task.Delay(TimeSpan.FromMinutes(15));
             }
         }
     }
