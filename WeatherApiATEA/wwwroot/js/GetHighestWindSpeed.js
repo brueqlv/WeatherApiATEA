@@ -40,7 +40,7 @@
                             if (label) {
                                 label += ': ';
                             }
-                            label += context.parsed.y + ' m/s, Country: ' + countries[index] + ', Last Updated: ' + timeAdded[index];
+                            label += context.parsed.y + ' m/s, Country: ' + countries[index] + ', Last Updated: ' + timesAdded[index];
                             return label;
                         }
                     }
