@@ -17,7 +17,7 @@ namespace WeatherDataBaseFiller
         {
             try
             {
-                var weatherForecast = await _weatherApi.GetWeatherData(city.Latitude, city.Longitude, _apiKey);
+                WeatherForecast weatherForecast = await _weatherApi.GetWeatherData(city.Latitude, city.Longitude, _apiKey);
                 return weatherForecast;
             }
             catch (Exception ex)

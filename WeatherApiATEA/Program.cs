@@ -7,7 +7,9 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<WeatherDBContext>(options =>
 {
-    options.UseSqlServer("Server=GundarsPC;Database=Weather;Trusted_Connection=True;");
+    string connectionString = builder.Configuration.GetConnectionString("WeatherDatabase");
+
+    options.UseSqlServer(connectionString);
 }, ServiceLifetime.Scoped);
 
 builder.Services.AddTransient<WeatherDataRetrievalService>();
