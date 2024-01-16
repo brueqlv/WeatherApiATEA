@@ -26,25 +26,25 @@ namespace WeatherAPI.Controllers
         [HttpGet("GetMinTemperatures")]
         public IActionResult GetMinTemperatures()
         {
-            List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetMinTemperatureByCountry();
+            List<CityWeatherInfo> temperaturesByCity = _weatherDataRetrievalService.GetMinTemperatureByCity();
 
-            return View(citiesWeather);
+            return View(temperaturesByCity);
         }
 
         [HttpGet("GetHighestWindSpeed")]
         public IActionResult GetHighestWindSpeed()
         {
-            List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetHighestWindSpeedByCountry();
+            List<CityWeatherInfo> windSpeedByCity = _weatherDataRetrievalService.GetHighestWindSpeedByCity();
 
-            return View(citiesWeather);
+            return View(windSpeedByCity);
         }
 
         [HttpGet("GetTwoHourTrend/{cityName}")]
         public IActionResult GetTwoHourTrend(string cityName)
         {
-            List<CityWeatherInfo> citiesWeather = _weatherDataRetrievalService.GetTwoHourTrendData(cityName);
+            List<CityWeatherInfo> citieWeatherTrend = _weatherDataRetrievalService.GetTwoHourWindSpeedAndTemperatureTrendData(cityName);
 
-            return View(citiesWeather);
+            return View(citieWeatherTrend);
         }
     }
 }

@@ -9,12 +9,7 @@
             _dbContext = dbContext;
         }
 
-        public List<CityWeatherInfo> GetCityWeatherInfo()
-        {
-            return _dbContext.CityWeatherInfos.ToList();
-        }
-
-        public List<CityWeatherInfo> GetMinTemperatureByCountry()
+        public List<CityWeatherInfo> GetMinTemperatureByCity()
         {
             var minTemp = _dbContext.CityWeatherInfos
                 .GroupBy(c => c.City)
@@ -26,7 +21,7 @@
             return minTemp;
         }
 
-        public List<CityWeatherInfo> GetHighestWindSpeedByCountry()
+        public List<CityWeatherInfo> GetHighestWindSpeedByCity()
         {
             var minTemp = _dbContext.CityWeatherInfos
                 .GroupBy(c => c.City)
@@ -38,7 +33,7 @@
             return minTemp;
         }
 
-        public List<CityWeatherInfo> GetTwoHourTrendData(string cityName)
+        public List<CityWeatherInfo> GetTwoHourWindSpeedAndTemperatureTrendData(string cityName)
         {
             var twoHoursAgo = DateTime.Now.AddHours(-2);
 

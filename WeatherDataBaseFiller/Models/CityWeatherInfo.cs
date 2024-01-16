@@ -5,10 +5,7 @@ namespace WeatherDataBaseFiller
 {
     public class CityWeatherInfo
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         public string Country { get; set; }
         public string City { get; set; }
         public double Temperature { get; set; }

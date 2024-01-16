@@ -1,14 +1,15 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    var ctx = document.getElementById('myChart').getContext('2d');
+    const ctx = document.getElementById('myChart').getContext('2d');
 
-    var windSpeeds = chartData.windSpeeds;
-    var temperatures = chartData.temperatures;
-    var countries = chartData.countries;
-    var cities = chartData.cities; var timeStamps = chartData.timeStamps.map(function (timestamp) {
+    const windSpeeds = chartData.windSpeeds;
+    const temperatures = chartData.temperatures;
+    const countries = chartData.countries;
+    const cities = chartData.cities;
+    const timeStamps = chartData.timeStamps.map(function (timestamp) {
         return new Date(timestamp);
     });
 
-    var myChart = new Chart(ctx, {
+    const myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: timeStamps,
@@ -66,7 +67,7 @@
                 tooltip: {
                     callbacks: {
                         label: function (context) {
-                            var label = context.dataset.label || '';
+                            let label = context.dataset.label || '';
                             if (label) {
                                 label += ': ';
                             }
@@ -78,9 +79,9 @@
                                 label += 'm/s';
                             }
 
-                            var timeAdded = new Date(context.parsed.x);
-                            var country = countries[context.dataIndex];
-                            var city = cities[context.dataIndex];
+                            const timeAdded = new Date(context.parsed.x);
+                            const country = countries[context.dataIndex];
+                            const city = cities[context.dataIndex];
 
                             label += '\nCountry: ' + country;
                             label += '\nCity: ' + city;

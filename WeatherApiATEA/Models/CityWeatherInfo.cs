@@ -5,7 +5,6 @@ namespace WeatherApiATEA.Models
 {
     public class CityWeatherInfo
     {
-        [Key]
         public int Id { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
