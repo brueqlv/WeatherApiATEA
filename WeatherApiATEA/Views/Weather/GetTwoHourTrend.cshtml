@@ -1,0 +1,38 @@
+﻿@model List<CityWeatherInfo>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <script type="module" src="~/js/CitiesWeatherTrendGraph.js" asp-append-version="true"></script>
+</head>
+<body>
+    @{
+        var cityName = Model.Select(c => c.City).First().ToString();
+        var decodedCityName = System.Web.HttpUtility.HtmlDecode(cityName);
+    }
+
+    <h1>Temperature and Wind Speed Trend @decodedCityName</h1>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <canvas id="myChart" width="800" height="400"></canvas>
+    }
+    else
+    {
+        <p>No weather data available.</p>
+    }
+
+    <script>
+        var chartData = {
+            timeStamps: @Html.Raw(Json.Serialize(Model.Select(c => c.SavedAt.ToString("yyyy-MM-ddTHH:mm:ss")))),
+            temperatures: @Html.Raw(Json.Serialize(Model.Select(c => c.Temperature))),
+            windSpeeds: @Html.Raw(Json.Serialize(Model.Select(c => c.WindSpeed))),
+            countries: @Html.Raw(Json.Serialize(Model.Select(c => c.Country))),
+            cities: @Html.Raw(Json.Serialize(Model.Select(c => c.City)))
+            };
+    </script>
+</body>
+</html>

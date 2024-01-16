@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace WeatherApiATEA.Models
+﻿namespace WeatherDataBaseFiller
 {
     public class WeatherRepository
     {
-        WeatherService _weatherService;
+        readonly WeatherService _weatherService;
 
         public WeatherRepository(WeatherService weatherService)
         {
@@ -20,7 +18,7 @@ namespace WeatherApiATEA.Models
             new City("Jasna", 54.0035, 19.3053),
             new City("Bled", 46.3692, 14.1136),
             new City("Krakow", 50.0833, 19.9167),
-            new City("Parise", 46.0762, 11.4668),
+            new City("Paris", 46.0762, 11.4668),
             new City("London", 51.5085, -0.1257),
             new City("Antalya Province", 36.7741, 30.7178),
         };
@@ -34,8 +32,8 @@ namespace WeatherApiATEA.Models
                 var cityWeatherInfo = await _weatherService.GetWeatherData(city);
 
                 string countryName = cityWeatherInfo.Sys.Country;
-                string cityName = cityWeatherInfo.Name;
-                double temp = cityWeatherInfo.Main.Temp;
+                string cityName = city.Name;
+                double temp = GetCelciusFromKelvin(cityWeatherInfo.Main.Temp);
                 double clouds = cityWeatherInfo.Clouds.All;
                 double windSpeed = cityWeatherInfo.Wind.Speed;
 
@@ -43,6 +41,11 @@ namespace WeatherApiATEA.Models
             }
 
             return _citiesWeather;
+        }
+
+        private static double GetCelciusFromKelvin(double kelvin)
+        {
+            return Math.Round(kelvin - 273.15, 2);
         }
     }
 }

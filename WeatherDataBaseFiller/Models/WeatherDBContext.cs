@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WeatherApiATEA.Models
+namespace WeatherDataBaseFiller
 {
     public class WeatherDBContext : DbContext
     {

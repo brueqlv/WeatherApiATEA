@@ -1,0 +1,30 @@
+﻿@model List<CityWeatherInfo>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="~/js/MinTemperaturesChart.js" asp-append-version="true"></script>
+</head>
+<body>
+    <h1>Minimal Temperature for Cities</h1>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <canvas id="myChart" width="800" height="200"></canvas>
+    }
+    else
+    {
+        <p>No weather data available.</p>
+    }
+
+    <script>
+        var chartData = {
+            cityLabels: @Html.Raw(Json.Serialize(Model.Select(c => c.City))),
+            temperatures: @Html.Raw(Json.Serialize(Model.Select(c => c.Temperature))),
+            countries: @Html.Raw(Json.Serialize(Model.Select(c => c.Country))),
+            timesAdded: @Html.Raw(Json.Serialize(Model.Select(c => c.SavedAt)))
+        };
+    </script>
+</body>
+</html>

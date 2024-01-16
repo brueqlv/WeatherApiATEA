@@ -1,4 +1,4 @@
-﻿namespace WeatherApiATEA.Models
+﻿namespace WeatherDataBaseFiller
 {
     public class City
     {

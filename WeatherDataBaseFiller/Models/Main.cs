@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace WeatherApiATEA.Models
+namespace WeatherDataBaseFiller
 {
     public class Main
     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -18,7 +19,8 @@ namespace WeatherApiATEA.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Temperature = table.Column<double>(type: "float", nullable: false),
                     Clouds = table.Column<double>(type: "float", nullable: false),
-                    WindSpeed = table.Column<double>(type: "float", nullable: false)
+                    WindSpeed = table.Column<double>(type: "float", nullable: false),
+                    SavedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
